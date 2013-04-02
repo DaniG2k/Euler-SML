@@ -1,4 +1,4 @@
-fun mults_3_or_5 (i: int, c: int)=
+fun mults_3_or_5 (i, c)=
     case c of
 	1000 => i
       | c => if c mod 3 = 0 orelse c mod 5 = 0
