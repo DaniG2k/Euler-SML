@@ -1,11 +1,12 @@
 use "tools.sml";
 
-fun sum (lst)=
-    let
-	fun aux (lst, counter)=
-	    case lst of
-		[] => counter
-	      | x::xs => aux (xs, counter + x)
-    in
-	aux(lst, 0)
-    end
+fun even_fibs (fib, acc)=
+    case fib of
+	[] => acc
+      | x::xs => if x mod 2 = 0
+		 then
+		     even_fibs(xs, x::acc)
+		 else
+		     even_fibs(xs, acc)
+
+val result = sum( even_fibs( fib(4000000), []) )
