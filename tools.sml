@@ -1,3 +1,5 @@
+open IntInf;
+
 (* Find the greatest and smallest int in a list *)
 fun min_max_helper (f, lst)=
     List.foldl (fn (x, y) => if f (x, y) then x else y) (hd lst) lst
@@ -29,13 +31,10 @@ fun prime_factors n=
     if n > 0 andalso n <= 3 then [n]
     else
 	let
-(* Opening IntInf or Math at beginning of file
-would allow us to deal with huge numbers, but
-this way consumes less resources. *)
 	    val start = 2
 	    val num = Math.sqrt(Real.fromLargeInt(n))
 	    val sqr_of_num = (Real.toLargeInt IEEEReal.TO_NEAREST num) + 1
-	    val stop = max [IntInf.toLarge 3, sqr_of_num]
+	    val stop = max [3, sqr_of_num]
 	    fun aux (fac, stop, n, acc)=
 		if fac > stop
 		then acc
