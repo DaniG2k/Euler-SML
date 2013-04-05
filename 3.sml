@@ -1,3 +1,3 @@
 use "tools.sml";
 
-prime_factors(n)
+val result = hd(prime_factors(600851475143))
