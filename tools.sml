@@ -1,16 +1,14 @@
+(* Find the greatest and smallest int in a list *)
+fun min_max_helper (f, lst)=
+    List.foldl (fn (x, y) => if f (x, y) then x else y) (hd lst) lst
+fun max lst= min_max_helper(op >=, lst)
+fun min lst= min_max_helper(op <=, lst)
+
 (* Sum a list of integers *)
-fun sum (lst)=
-    let
-	fun aux (lst, counter)=
-	    case lst of
-		[] => counter
-	      | x::xs => aux (xs, counter + x)
-    in
-	aux(lst, 0)
-    end
+fun sum lst= List.foldl (fn (x,y) => x+y) 0 lst
 
 (* Fibonacci numbers up to n using iteration. *)
-fun fib (n)=
+fun fib n=
     let
 	fun aux (n1, n2, fib, limit, a)=
 	    if fib < limit
@@ -26,3 +24,22 @@ fun fib (n)=
     in
 	aux (1, 0, 0, n, nil)
     end
+			 
+fun prime_factors n=
+    if n > 0 andalso n <= 3 then [n]
+    else
+	let
+	    val start = 2
+	    val num = Math.sqrt(Real.fromInt(n))
+	    val sqr_of_num = (Real.toInt IEEEReal.TO_NEAREST num) + 1
+	    val stop = max [3, sqr_of_num]
+	    fun aux (fac, stop, n, acc)=
+		if fac > stop
+		then acc
+		else
+		    if n mod fac = 0
+		    then aux (fac+1, stop, n div fac, fac :: acc)
+		    else aux (fac+1, stop, n, acc)
+	in
+	    aux (start, stop, n, nil)
+	end	

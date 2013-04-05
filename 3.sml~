@@ -1,0 +1,3 @@
+use "tools.sml";
+
+primefactors(600851475143)
